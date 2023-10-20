@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/**'
       - 'Cargo.toml'
+      - '.github/workflows/build-publish.yml'
   workflow_dispatch:
 
 jobs:
@@ -40,6 +41,13 @@ jobs:
         id: semantic_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Store the updated version in Cargo.toml
+      - uses: actions/upload-artifact@v3
+        with:
+          name: semantic-release
+          path: Cargo.toml
+          retention-days: 1
 
     outputs:
       version: ${{ steps.semantic_release.outputs.version }}
