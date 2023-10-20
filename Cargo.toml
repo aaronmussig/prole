@@ -1,0 +1,21 @@
+[package]
+name = "prole"
+version = "0.1.0"
+edition = "2021"
+authors = ["Aaron Mussig <aaronmussig@gmail.com>"]
+description = "Prole is a collection of re-usable methods in Rust. Feel free to use them for your own work."
+readme = "README.md"
+repository = "https://github.com/aaronmussig/prole"
+license = "GPL-3.0"
+rust-version = "1.65.0"
+
+[dependencies]
+bio = "1.4.0"
+chrono = "0.4.31"
+derive_more = "0.99.17"
+env_logger = "0.10.0"
+flate2 = "1.0.28"
+lazy_static = "1.4.0"
+log = "0.4.20"
+regex = "1.10.2"
+tempfile = "3.8.0"
