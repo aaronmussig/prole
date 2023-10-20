@@ -47,8 +47,8 @@ jobs:
 
   test_rust:
     name: Build Rust
-    needs: semantic_release_next_version
-    if: needs.semantic_release_next_version.outputs.version != ''
+    needs: semantic_release_dry_run
+    if: needs.semantic_release_dry_run.outputs.version != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
