@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/aaronmussig/prole/compare/v1.1.1...v1.2.0) (2023-10-23)
+
+
+### Features
+
+* **HmmAlignFile:** Add parser for hmmalign Pfam output format. ([d98e764](https://github.com/aaronmussig/prole/commit/d98e76446948622c2e1b970fb242026599bb5edd))
+
 ## [1.1.1](https://github.com/aaronmussig/prole/compare/v1.1.0...v1.1.1) (2023-10-23)
 
 
