@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/aaronmussig/prole/compare/v1.1.0...v1.1.1) (2023-10-23)
+
+
+### Bug Fixes
+
+* **HmmSearchHit:** Fix a parsing issue where the program would crash on valid matches. ([cfc889b](https://github.com/aaronmussig/prole/commit/cfc889b7c55f5306268b494c55037d9c17f5312c))
+
 # [1.1.0](https://github.com/aaronmussig/prole/compare/v1.0.0...v1.1.0) (2023-10-23)
 
 
