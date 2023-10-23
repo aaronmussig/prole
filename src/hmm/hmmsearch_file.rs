@@ -127,7 +127,7 @@ pub struct HmmSearchHit {
 
 
 lazy_static! {
-    static ref RE_HMM_SEARCH_LINE: Regex = Regex::new(r"^([^\s]+)\s+([^\s]+)\s+([^\s]+)\s+([^\s]+)\s+([\d.e+-]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.e+-]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(.+)$").unwrap();
+    static ref RE_HMM_SEARCH_LINE: Regex = Regex::new(r"^([^\s]+)\s+([^\s]+)\s+([^\s]+)\s+([^\s]+)\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(.+)$").unwrap();
 }
 
 /// A hit within the [HmmSearchHit] struct.
@@ -259,6 +259,33 @@ mod tests {
         assert_eq!(hit.rep, 1);
         assert_eq!(hit.inc, 1);
         assert_eq!(hit.description, "# 15227 # 15421 # -1 # ID=27_18;partial=00;start_type=ATG;rbs_motif=None;rbs_spacer=None;gc_cont=0.492");
+    }
+
+    #[test]
+    fn test_from_string_valid_2() {
+        let string = "DEJT01000119.1_4     -          TIGR04114            TIGR04114    3.7e-05   20.9  53.4     2e+03  -17.7  53.4   3.2   1   1   0   1   1   0   0 # 2754 # 3044 # 1 # ID=58_4;partial=00;start_type=ATG;rbs_motif=TAAAAA;rbs_spacer=4bp;gc_cont=0.471";
+        let result = HmmSearchHit::from_string(string);
+        assert!(result.is_ok());
+        let hit = result.unwrap();
+        assert_eq!(hit.target_name, "DEJT01000119.1_4");
+        assert_eq!(hit.target_accession, None);
+        assert_eq!(hit.query_name, "TIGR04114");
+        assert_eq!(hit.query_accession, Some("TIGR04114".to_string()));
+        assert_eq!(hit.full_seq_evalue, 3.7e-05);
+        assert_eq!(hit.full_seq_score, 20.9);
+        assert_eq!(hit.full_seq_bias, 53.4);
+        assert_eq!(hit.best_domain_evalue, 2e+03);
+        assert_eq!(hit.best_domain_score, -17.7);
+        assert_eq!(hit.best_domain_bias, 53.4);
+        assert_eq!(hit.exp, 3.2);
+        assert_eq!(hit.reg, 1);
+        assert_eq!(hit.clu, 1);
+        assert_eq!(hit.ov, 0);
+        assert_eq!(hit.env, 1);
+        assert_eq!(hit.dom, 1);
+        assert_eq!(hit.rep, 0);
+        assert_eq!(hit.inc, 0);
+        assert_eq!(hit.description, "# 2754 # 3044 # 1 # ID=58_4;partial=00;start_type=ATG;rbs_motif=TAAAAA;rbs_spacer=4bp;gc_cont=0.471");
     }
 
     #[test]
