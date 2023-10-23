@@ -1,44 +1,43 @@
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::num::{ParseFloatError, ParseIntError};
 use std::path::Path;
 
 use crate::error::{ProleError, ProleResult};
 use crate::genome::genome_id::GenomeId;
 use crate::gtdb::taxonomy::Taxonomy;
 
-fn parse_float<T: std::str::FromStr<Err=ParseFloatError>>(value: &str) -> ProleResult<T> {
-    value.parse().map_err(ProleError::ParseFloatError)
-}
-
-fn parse_opt_float<T: std::str::FromStr<Err=ParseFloatError>>(value: &str) -> ProleResult<Option<T>> {
-    if value == "none" {
-        Ok(None)
-    } else {
-        value.parse().map(Some).map_err(ProleError::ParseFloatError)
-    }
-}
-
-fn parse_int<T: std::str::FromStr<Err=ParseIntError>>(value: &str) -> ProleResult<T> {
-    value.parse().map_err(ProleError::ParseIntError)
-}
-
-fn parse_opt_int<T: std::str::FromStr<Err=ParseIntError>>(value: &str) -> ProleResult<Option<T>> {
-    if value == "none" {
-        Ok(None)
-    } else {
-        value.parse().map(Some).map_err(ProleError::ParseIntError)
-    }
-}
-
-fn parse_opt_string(value: &str) -> Option<String> {
-    if value == "none" {
-        None
-    } else {
-        Some(value.to_string())
-    }
-}
+// fn parse_float<T: std::str::FromStr<Err=ParseFloatError>>(value: &str) -> ProleResult<T> {
+//     value.parse().map_err(ProleError::ParseFloatError)
+// }
+//
+// fn parse_opt_float<T: std::str::FromStr<Err=ParseFloatError>>(value: &str) -> ProleResult<Option<T>> {
+//     if value == "none" {
+//         Ok(None)
+//     } else {
+//         value.parse().map(Some).map_err(ProleError::ParseFloatError)
+//     }
+// }
+//
+// fn parse_int<T: std::str::FromStr<Err=ParseIntError>>(value: &str) -> ProleResult<T> {
+//     value.parse().map_err(ProleError::ParseIntError)
+// }
+//
+// fn parse_opt_int<T: std::str::FromStr<Err=ParseIntError>>(value: &str) -> ProleResult<Option<T>> {
+//     if value == "none" {
+//         Ok(None)
+//     } else {
+//         value.parse().map(Some).map_err(ProleError::ParseIntError)
+//     }
+// }
+//
+// fn parse_opt_string(value: &str) -> Option<String> {
+//     if value == "none" {
+//         None
+//     } else {
+//         Some(value.to_string())
+//     }
+// }
 
 /// A row within the [GtdbMetadataR214] file.
 pub struct GtdbMetadataR214Row {
