@@ -1,3 +1,15 @@
+## [1.2.1](https://github.com/aaronmussig/prole/compare/v1.2.0...v1.2.1) (2023-10-23)
+
+
+### Bug Fixes
+
+* **GtdbMetadataR214:** Remove debugging messages. ([491d19a](https://github.com/aaronmussig/prole/commit/491d19a1d53c141f2d8b33771b127ea5e3c647cd))
+
+
+### Performance Improvements
+
+* **HmmAlignFile:** Pre-allocate output alignment. ([acee626](https://github.com/aaronmussig/prole/commit/acee626ea2b54bf12cd3b2216a1956f0ad459b0e))
+
 # [1.2.0](https://github.com/aaronmussig/prole/compare/v1.1.1...v1.2.0) (2023-10-23)
 
 
