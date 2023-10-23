@@ -155,7 +155,6 @@ pub struct GtdbMetadataR214Row {
 
 impl GtdbMetadataR214Row {
     pub fn from_string(string: &str) -> ProleResult<Self> {
-        println!("string: {}\n", string);
         let split = string.split('\t').collect::<Vec<&str>>();
         if split.len() != 110 {
             return Err(ProleError::Exit(format!("Expected 110 columns, got {}", split.len())));
