@@ -21,6 +21,7 @@ pub struct HmmAlignFile {
     pub pp: HashMap<String, String>,
     pub pp_cons: String,
     pub mask: Vec<bool>,
+    pub mask_idx: Vec<usize>,
 }
 
 impl HmmAlignFile {
@@ -39,6 +40,7 @@ impl HmmAlignFile {
         let mut pp = HashMap::new();
         let mut pp_cons = String::new();
         let mut mask = vec![];
+        let mut mask_idx = vec![];
 
         for line in buf.lines() {
             let line = line.map_err(ProleError::IoError)?;
@@ -68,7 +70,14 @@ impl HmmAlignFile {
                 if !mask.is_empty() {
                     return Err(ProleError::Exit(format!("Duplicate: {}", line)));
                 }
-                mask = hits[1].chars().map(|c| c == 'x').collect();
+                for (idx, char) in hits[1].chars().enumerate() {
+                    if char == 'x' {
+                        mask.push(true);
+                        mask_idx.push(idx);
+                    } else {
+                        mask.push(false);
+                    }
+                }
             } else {
                 // Within genome alignment
                 let hits = RE_ALIGN.captures(&line)
@@ -94,12 +103,12 @@ impl HmmAlignFile {
         if pp_cons.is_empty() {
             return Err(ProleError::Exit("Missing PP_cons".to_string()));
         }
-        if mask.is_empty() {
+        if mask.is_empty() || mask_idx.is_empty() {
             return Err(ProleError::Exit("Missing mask".to_string()));
         }
 
         // All ok
-        Ok(Self { seq, pp, pp_cons, mask })
+        Ok(Self { seq, pp, pp_cons, mask, mask_idx })
     }
 
     /// Read the content from a [Path] and parse it into a [HmmAlignFile].
@@ -128,10 +137,11 @@ impl HmmAlignFile {
     pub fn get_alignment(&self, gene_id: &str) -> ProleResult<String> {
         let seq = self.seq.get(gene_id)
             .ok_or_else(|| ProleError::Exit(format!("Missing sequence for: {}", gene_id)))?;
-        let out = seq.chars().zip(self.mask.iter())
-            .filter(|(_, keep)| **keep)
-            .map(|(c, _)| c)
-            .collect::<String>();
+        let seq_chars: Vec<_> = seq.chars().collect();
+        let mut out = String::with_capacity(self.mask_idx.len());
+        for &idx in &self.mask_idx {
+            out.push(seq_chars[idx]);
+        }
         Ok(out)
     }
 }
@@ -171,6 +181,7 @@ mod tests {
         assert_eq!(result.pp.len(), 5);
         assert_eq!(result.pp_cons, "..79***");
         assert_eq!(result.mask, vec![false, false, true, false, true, true, false]);
+        assert_eq!(result.mask_idx, vec![2, 4, 5]);
 
         assert_eq!(result.seq.get("G1").unwrap(), ".mAKIIN");
         assert_eq!(result.pp.get("G1").unwrap(), ".*799**");
