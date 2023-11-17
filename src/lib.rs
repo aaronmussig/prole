@@ -8,3 +8,4 @@ pub mod hmm;
 pub mod genome;
 pub mod gtdb;
 pub mod phylorank;
+mod sequence;
