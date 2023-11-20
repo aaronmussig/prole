@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/aaronmussig/prole/compare/v1.3.0...v1.3.1) (2023-11-20)
+
+
+### Bug Fixes
+
+* **sequence:** Make methods public. ([8cfb1c0](https://github.com/aaronmussig/prole/commit/8cfb1c0cce26bee517bf8dac0af1a3ce7790f235))
+
 # [1.3.0](https://github.com/aaronmussig/prole/compare/v1.2.1...v1.3.0) (2023-11-17)
 
 
