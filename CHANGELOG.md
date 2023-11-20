@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/aaronmussig/prole/compare/v1.2.1...v1.3.0) (2023-11-17)
+
+
+### Bug Fixes
+
+* **cargo:** Update dependencies. ([9845e59](https://github.com/aaronmussig/prole/commit/9845e59c1e2c812c188616b8cd1e8fe7c48f3611))
+
+
+### Features
+
+* **sequence:** Add methods for nucleotide to protein translation. ([d0f8ade](https://github.com/aaronmussig/prole/commit/d0f8adebff0950ea287966806f2e6c70377ae356))
+
 ## [1.2.1](https://github.com/aaronmussig/prole/compare/v1.2.0...v1.2.1) (2023-10-23)
 
 
